@@ -516,21 +516,28 @@
             </a>
         </div>
     <!-- CountAPI Script -->
-    <script>
+
+        <script>
         fetch('https://api.countapi.xyz/hit/rushabhvanara.github.io/visits')
             .then(async response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
                 const data = await response.json();
                 document.getElementById('visitor-count').innerText = data.value;
             })
             .catch(error => {
-                document.getElementById('visitor-count').innerText = '---';
+                // Gracefully fallback so it doesn't stay stuck on "Loading..."
+                console.error('Visitor counter failed to load:', error);
+                document.getElementById('visitor-count').innerText = 'Unavailable';
             });
-    </script>
+        </script>
     </main>
 
     <!-- Footer -->
     <footer>
-        <div class="visitor-counter">
+        <footer>
+            <div class="visitor-counter">
             Total Visits: <span id="visitor-count">Loading...</span>
         </div>
         <p>© Rushabh D. Vanara | Department of Electrical Engineering, Government Polytechnic, Junagadh</p>

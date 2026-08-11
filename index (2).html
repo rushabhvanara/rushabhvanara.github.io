@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rushabh D. Vanara | Lecturer in Electrical Engineering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --accent-blue: #2563eb;
+            --accent-cyan: #0284c7;
+            --accent-gold: #d97706;
+            --bg-body: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 25px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Reduced Height Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 30px 20px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 6px;
+        }
+
+        .hero .title {
+            font-size: 1.1rem;
+            color: #93c5fd;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .hero .institute {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1100px;
+            margin: -25px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 35px 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title svg {
+            color: var(--accent-blue);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 22px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-blue);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: #cbd5e1;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .tag-sim {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .tag-exp {
+            background-color: #fef3c7;
+            color: #b45309;
+        }
+
+        .tag-res {
+            background-color: #dcfce7;
+            color: #15803d;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--accent-blue);
+            transition: gap 0.2s ease;
+        }
+
+        .card:hover .card-link {
+            gap: 12px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .visitor-counter {
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 640px) {
+            .hero { padding: 25px 15px 40px; }
+            .hero h1 { font-size: 1.75rem; }
+            .hero .title { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-container">
+            <h1>Rushabh D. Vanara</h1>
+            <div class="title">Lecturer in Electrical Engineering</div>
+            <div class="institute">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m0 0v-5a2 2 0 012-2h2a2 2 0 012 2v5"></path></svg>
+                Government Polytechnic, Junagadh
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+
+        <!-- Power System Virtual Simulations -->
+        <h2 class="section-title">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Interactive Power System Simulators
+        </h2>
+        
+        <div class="grid">
+            <!-- Sim 1 -->
+            <a href="https://rushabhvanara.github.io/symcomp/" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-sim">Simulation</span>
+                    <h3>Symmetrical Component Simulation</h3>
+                    <p>Interactive web simulation for symmetrical component analysis (positive, negative, and zero sequence components) in unbalanced power systems.</p>
+                </div>
+                <div class="card-link">
+                    Launch Simulator 
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Sim 2 -->
+            <a href="https://rushabhvanara.github.io/flow/" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-sim">Simulation</span>
+                    <h3>Power Flow Simulation</h3>
+                    <p>Web-based power flow solver to analyze bus voltages, power angles, and line losses in transmission networks.</p>
+                </div>
+                <div class="card-link">
+                    Launch Simulator 
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+        </div>
+
+        <!-- PSOM Virtual Lab Experiments -->
+        <h2 class="section-title">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+            PSOM Virtual Lab Experiments
+        </h2>
+
+        <div class="grid">
+            <!-- Exp 1 -->
+            <a href="https://rushabhvanara.github.io/psom1/" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 01</span>
+                    <h3>Power System Per-Unit & Power Flow Calculator</h3>
+                    <p>Calculate and analyze power systems using per-unit system representations and power flow evaluation.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 1
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 2 -->
+            <a href="https://rushabhvanara.github.io/psom2/" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 02</span>
+                    <h3>Transformer Tap Changer: Real & Reactive Power Control</h3>
+                    <p>Real and reactive power flow control using transformer tap changers (OLTC) and phase-shifting mechanism.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 2 
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 3 -->
+            <a href="https://rushabhvanara.github.io/psom3/" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 03</span>
+                    <h3>Economic Load Dispatch (ELD) Simulator</h3>
+                    <p>Interactive study of power sharing among thermal generating units based on cost functions and equal incremental cost.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 3 
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 4 -->
+            <a href="https://rushabhvanara.github.io/psom4/" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 04</span>
+                    <h3>3-Plant Economic Load Dispatch (₹)</h3>
+                    <p>Optimization of power generation cost in Indian Rupees (₹) for a 3-plant interconnected system considering generator limits.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 4 
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 5 -->
+            <a href="https://rushabhvanara.github.io/psom5/" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 05</span>
+                    <h3>HVAC vs HVDC Power & Loss Simulator</h3>
+                    <p>Comparative simulator for active power, reactive power, and transmission loss between HVAC and HVDC systems.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 5
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 6 -->
+            <a href="https://rushabhvanara.github.io/psom6" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 06</span>
+                    <h3>Transmission Line Reactive Power Compensation</h3>
+                    <p>Interactive web simulation of Series, Shunt, and Series-Shunt (UPFC) reactive power compensation.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 6
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 7 -->
+            <a href="https://rushabhvanara.github.io/psom7" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 07</span>
+                    <h3>Transmission System Voltage Control</h3>
+                    <p>Interactive comparison of Shunt FACTS Controllers for voltage stability: SVC vs. STATCOM.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 7
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 8 -->
+            <a href="https://rushabhvanara.github.io/psom8" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 08</span>
+                    <h3>Power Flow Control with FACTS Controllers</h3>
+                    <p>Study power flow control using advanced FACTS controllers including TCSC, SSSC, and UPFC.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 8
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 9 Basic -->
+            <a href="https://rushabhvanara.github.io/psom9" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 09</span>
+                    <h3>Power System Stability via FACTS (Basic)</h3>
+                    <p>Basic simulation for power system transient and steady-state stability improvement using FACTS devices.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 9 (Basic)
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 9 Advanced -->
+            <a href="https://rushabhvanara.github.io/psom9pro" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 09 Pro</span>
+                    <h3>Power System Stability via FACTS (Advanced)</h3>
+                    <p>Advanced simulation and deep analysis for power system stability enhancement using FACTS controllers.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 9 Pro
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 10 -->
+            <a href="https://rushabhvanara.github.io/psom10" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 10</span>
+                    <h3>Demand Side Management (DSM) Simulator</h3>
+                    <p>Interactive study of Peak Clipping, Valley Filling, and Load Shifting techniques in smart grids.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 10
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 11 -->
+            <a href="https://rushabhvanara.github.io/psom11" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 11</span>
+                    <h3>Study of Load Curve & Load Duration Curve</h3>
+                    <p>Analyze daily/annual electrical load curves and derive corresponding load duration curves.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 11
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 12 -->
+            <a href="https://rushabhvanara.github.io/psom12" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 12</span>
+                    <h3>Smart Grid Demand Response Simulator</h3>
+                    <p>Simulate pricing signals and dynamic demand response strategies in modern smart grids.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 12
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Exp 13 -->
+            <a href="https://rushabhvanara.github.io/psom13" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-exp">Experiment 13</span>
+                    <h3>Microgrid & BESS Energy Simulator</h3>
+                    <p>Interactive study of Renewable Generation, Battery Storage (BESS), and Load Balancing.</p>
+                </div>
+                <div class="card-link">
+                    Open Lab Exp 13
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+        </div>
+
+        <!-- Resources Section -->
+        <h2 class="section-title">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            Academic Resources
+        </h2>
+
+        <div class="grid">
+            <!-- Learning Materials -->
+            <a href="https://tiny.cc/rushabhx" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-res">Resource</span>
+                    <h3>EE Learning Materials</h3>
+                    <p>Access notes, lab manuals, presentations, and study materials for diploma electrical engineering courses.</p>
+                </div>
+                <div class="card-link">
+                    Access Materials 
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2.2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </div>
+            </a>
+
+            <!-- YouTube Channel -->
+            <a href="https://www.youtube.com/@RushabhV1" target="_blank" rel="noopener noreferrer" class="card">
+                <div>
+                    <span class="card-tag tag-res">Video Lectures</span>
+                    <h3>YouTube Video Channel</h3>
+                    <p>Watch educational video tutorials, practical demonstrations, and power system concept explanations.</p>
+                </div>
+                <div class="card-link">
+                    Visit YouTube Channel 
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="visitor-counter">
+            Total Visits: <span id="visitor-count">Loading...</span>
+        </div>
+        <p>© Rushabh D. Vanara | Department of Electrical Engineering, Government Polytechnic, Junagadh</p>
+    </footer>
+
+    <!-- CountAPI Script -->
+    <script>
+        fetch('https://api.countapi.xyz/hit/rushabhvanara.github.io/visits')
+            .then(async response => {
+                const data = await response.json();
+                document.getElementById('visitor-count').innerText = data.value;
+            })
+            .catch(error => {
+                document.getElementById('visitor-count').innerText = '---';
+            });
+    </script>
+
+</body>
+</html>

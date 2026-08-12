@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rushabh D. Vanara | Digital Lab Portfolio</title>
+    <title>Rushabh D. Vanara | LEE, GP, Junagadh</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -190,9 +190,9 @@
 
     <header>
         <div class="hero-content">
-            <h1>Rushabh D. Vanara</h1>
-            <p>Lecturer in Electrical Engineering</p>
-            <span class="inst-name">Government Polytechnic, Junagadh</span>
+            <h1>Government Polytechnic, Junagadh</h1>
+            <p>Electrical Engineering Department</p>
+            <span class="inst-name">Rushabh D. Vanara</span>
         </div>
     </header>
 

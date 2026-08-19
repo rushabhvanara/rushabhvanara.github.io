@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Income Tax Calculator FY 2026-27</title>
+    <!-- External PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root { --primary: #1e40af; --bg: #f1f5f9; --text: #0f172a; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); color: var(--text); padding: 10px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        h1, h2 { text-align: center; color: var(--primary); margin-bottom: 5px; }
+        .subtitle { text-align: center; display: block; margin-bottom: 25px; color: #64748b; font-weight: bold; }
+
+        .form-section { margin-bottom: 25px; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; }
+        .section-title { font-weight: bold; color: var(--primary); border-bottom: 2px solid #e2e8f0; margin-bottom: 15px; padding-bottom: 5px; }
+
+        .grid-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; color: #475569; }
+        input, select { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
+
+        /* Monthly Table Styling */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { text-align: left; background: #f8fafc; padding: 8px; font-size: 0.8rem; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 5px; border-bottom: 1px solid #f1f5f9; }
+        .month-name { font-weight: 600; width: 100px; }
+
+        .btn-calculate { width: 100%; padding: 15px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .btn-pdf { width: 100%; padding: 15px; background: #059669; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; display: none; }
+
+        /* Results Area */
+        #result-area { display: none; margin-top: 30px; padding: 20px; border: 2px solid var(--primary); border-radius: 8px; background: #fff; }
+        .res-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #e2e8f0; }
+        .res-row.final { font-size: 1.3rem; font-weight: bold; color: var(--primary); border-top: 2px solid #e2e8f0; border-bottom: none; margin-top: 10px; }
+
+        @media (max-width: 600px) { .grid-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container" id="tax-app">
+    <h1>Income Tax Calculator</h1>
+    <span class="subtitle">FY 2026-27 (AY 2027-28)</span>
+
+    <!-- Personal Info -->
+    <div class="form-section">
+        <div class="section-title">Step 1: Personal Details</div>
+        <div class="grid-row">
+            <div><label>Full Name</label><input type="text" id="name" placeholder="John Doe"></div>
+            <div><label>PAN Number</label><input type="text" id="pan" placeholder="ABCDE1234F"></div>
+        </div>
+    </div>
+
+    <!-- Monthly Records -->
+    <div class="form-section">
+        <div class="section-title">Step 2: Monthly Income & TDS</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Income (₹)</th>
+                    <th>TDS Paid (₹)</th>
+                </tr>
+            </thead>
+            <tbody id="monthly-inputs">
+                <!-- Static Monthly Rows -->
+                <tr><td class="month-name">April</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">May</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">June</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">July</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">August</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">September</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">October</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">November</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">December</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">January</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">February</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+                <tr><td class="month-name">March</td><td><input type="number" class="m-inc" value="0"></td><td><input type="number" class="m-tds" value="0"></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Extra Income -->
+    <div class="form-section">
+        <div class="section-title">Step 3: Extra Income (Bonus/Rent/Arrears)</div>
+        <div class="grid-row">
+            <label>Extra Income Description</label>
+            <label>Income (₹)</label>
+            <label>TDS Paid (₹)</label>
+        </div>
+        <div class="grid-row" style="grid-template-columns: 2fr 1fr 1fr;">
+            <input type="text" placeholder="Extra 1"> <input type="number" class="e-inc" value="0"> <input type="number" class="e-tds" value="0">
+        </div>
+        <div class="grid-row" style="grid-template-columns: 2fr 1fr 1fr;">
+            <input type="text" placeholder="Extra 2"> <input type="number" class="e-inc" value="0"> <input type="number" class="e-tds" value="0">
+        </div>
+        <div class="grid-row" style="grid-template-columns: 2fr 1fr 1fr;">
+            <input type="text" placeholder="Extra 3"> <input type="number" class="e-inc" value="0"> <input type="number" class="e-tds" value="0">
+        </div>
+    </div>
+
+    <!-- Regime -->
+    <div class="form-section">
+        <div class="section-title">Step 4: Tax Regime & Deductions</div>
+        <label>Select Tax Regime</label>
+        <select id="regime" onchange="toggleRegime()">
+            <option value="new">New Tax Regime (Default)</option>
+            <option value="old">Old Tax Regime</option>
+        </select>
+
+        <div id="old-deductions" style="display:none; margin-top: 15px; background: #fff7ed; padding: 15px; border-radius: 8px;">
+            <div class="grid-row">
+                <div><label>80C (Max 1.5L)</label><input type="number" id="ded80c" value="0"></div>
+                <div><label>80D (Health)</label><input type="number" id="ded80d" value="0"></div>
+                <div><label>HRA Exemption</label><input type="number" id="hra" value="0"></div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-calculate" onclick="calculateTax()">Calculate Tax Summary</button>
+    
+    <!-- Printable Result Area -->
+    <div id="result-area">
+        <div id="pdf-content">
+            <h2 style="margin:0;">Tax Computation Report</h2>
+            <p style="text-align:center; font-size: 0.9rem; margin-top:0;">FY 2026-27 | AY 2027-28</p>
+            <hr>
+            <div class="res-row"><span><strong>Name:</strong></span> <span id="rName"></span></div>
+            <div class="res-row"><span><strong>PAN:</strong></span> <span id="rPan"></span></div>
+            <div class="res-row"><span><strong>Regime:</strong></span> <span id="rRegime"></span></div>
+            <br>
+            <div class="res-row"><span>Total Gross Income:</span> <span id="rGross"></span></div>
+            <div class="res-row"><span>Standard Deduction:</span> <span id="rStd"></span></div>
+            <div id="rOldDedsBox"></div>
+            <div class="res-row"><span>Taxable Income:</span> <span id="rTaxable"></span></div>
+            <div class="res-row"><span>Tax Before Cess:</span> <span id="rBaseTax"></span></div>
+            <div class="res-row"><span>Health & Education Cess (4%):</span> <span id="rCess"></span></div>
+            <div class="res-row"><span><strong>Total Tax Payable (A):</strong></span> <span id="rTotalTax"></span></div>
+            <div class="res-row"><span><strong>Total TDS Deducted (B):</strong></span> <span id="rTotalTds"></span></div>
+            <div class="res-row final">
+                <span id="finalLabel">Balance Tax Payable (A-B):</span>
+                <span id="rFinal"></span>
+            </div>
+            <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 5px;">
+                Note: This is an estimated report based on current FY 2026-27 tax slabs.
+            </p>
+        </div>
+    </div>
+
+    <button class="btn-pdf" id="pdfBtn" onclick="generatePDF()">Download PDF Report</button>
+</div>
+
+<script>
+    function toggleRegime() {
+        const regime = document.getElementById('regime').value;
+        document.getElementById('old-deductions').style.display = (regime === 'old') ? 'block' : 'none';
+    }
+
+    function calculateTax() {
+        let totalIncome = 0;
+        let totalTds = 0;
+
+        // Sum Monthly
+        document.querySelectorAll('.m-inc').forEach(i => totalIncome += Number(i.value) || 0);
+        document.querySelectorAll('.m-tds').forEach(i => totalTds += Number(i.value) || 0);
+
+        // Sum Extra
+        document.querySelectorAll('.e-inc').forEach(i => totalIncome += Number(i.value) || 0);
+        document.querySelectorAll('.e-tds').forEach(i => totalTds += Number(i.value) || 0);
+
+        const regime = document.getElementById('regime').value;
+        let stdDed = (regime === 'new') ? 75000 : 50000;
+        let otherDeds = 0;
+
+        if (regime === 'old') {
+            const c80 = Math.min(150000, Number(document.getElementById('ded80c').value) || 0);
+            const d80 = Number(document.getElementById('ded80d').value) || 0;
+            const hra = Number(document.getElementById('hra').value) || 0;
+            otherDeds = c80 + d80 + hra;
+        }
+
+        let taxableIncome = Math.max(0, totalIncome - stdDed - otherDeds);
+        let baseTax = 0;
+
+        // Tax Slabs FY 2026-27
+        if (regime === 'new') {
+            // New Regime Slab Logic
+            if (taxableIncome <= 700000) {
+                baseTax = 0;
+            } else {
+                let ti = taxableIncome;
+                if (ti > 1500000) { baseTax += (ti - 1500000) * 0.30; ti = 1500000; }
+                if (ti > 1200000) { baseTax += (ti - 1200000) * 0.20; ti = 1200000; }
+                if (ti > 1000000) { baseTax += (ti - 1000000) * 0.15; ti = 1000000; }
+                if (ti > 700000)  { baseTax += (ti - 700000) * 0.10; ti = 700000; }
+                if (ti > 300000)  { baseTax += (ti - 300000) * 0.05; }
+            }
+        } else {
+            // Old Regime Slab Logic
+            if (taxableIncome <= 500000) {
+                baseTax = 0;
+            } else {
+                let ti = taxableIncome;
+                if (ti > 1000000) { baseTax += (ti - 1000000) * 0.30; ti = 1000000; }
+                if (ti > 500000)  { baseTax += (ti - 500000) * 0.20; ti = 500000; }
+                if (ti > 250000)  { baseTax += (ti - 250000) * 0.05; }
+            }
+        }
+
+        const cess = baseTax * 0.04;
+        const totalTax = baseTax + cess;
+        const diff = totalTax - totalTds;
+
+        // Populate Report
+        document.getElementById('rName').innerText = document.getElementById('name').value || "Not Provided";
+        document.getElementById('rPan').innerText = (document.getElementById('pan').value || "Not Provided").toUpperCase();
+        document.getElementById('rRegime').innerText = regime.toUpperCase() + " REGIME";
+        document.getElementById('rGross').innerText = "₹" + totalIncome.toLocaleString();
+        document.getElementById('rStd').innerText = "₹" + stdDed.toLocaleString();
+        
+        const rOldDedsBox = document.getElementById('rOldDedsBox');
+        rOldDedsBox.innerHTML = regime === 'old' ? `<div class="res-row"><span>Regime Deductions:</span> <span>₹${otherDeds.toLocaleString()}</span></div>` : "";
+
+        document.getElementById('rTaxable').innerText = "₹" + Math.round(taxableIncome).toLocaleString();
+        document.getElementById('rBaseTax').innerText = "₹" + Math.round(baseTax).toLocaleString();
+        document.getElementById('rCess').innerText = "₹" + Math.round(cess).toLocaleString();
+        document.getElementById('rTotalTax').innerText = "₹" + Math.round(totalTax).toLocaleString();
+        document.getElementById('rTotalTds').innerText = "₹" + totalTds.toLocaleString();
+
+        const finalLabel = document.getElementById('finalLabel');
+        const rFinal = document.getElementById('rFinal');
+        if (diff >= 0) {
+            finalLabel.innerText = "Final Balance Tax Payable:";
+            rFinal.innerText = "₹" + Math.round(diff).toLocaleString();
+            rFinal.style.color = "#dc2626";
+        } else {
+            finalLabel.innerText = "Tax Refund Due:";
+            rFinal.innerText = "₹" + Math.round(Math.abs(diff)).toLocaleString();
+            rFinal.style.color = "#059669";
+        }
+
+        document.getElementById('result-area').style.display = "block";
+        document.getElementById('pdfBtn').style.display = "block";
+        window.scrollTo({ top: document.getElementById('result-area').offsetTop, behavior: 'smooth' });
+    }
+
+    function generatePDF() {
+        const element = document.getElementById('pdf-content');
+        const name = document.getElementById('name').value || "TaxReport";
+        const opt = {
+            margin: 10,
+            filename: `Tax_Summary_${name}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+
+</body>
+</html>

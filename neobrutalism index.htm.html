@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical vlabs | GP, Junagadh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ebebeb;
+            --main: #000000;
+            --white: #ffffff;
+            /* Neobrutalist Palette */
+            --accent-yellow: #FFD100;
+            --accent-blue: #3b82f6;
+            --accent-green: #22c55e;
+            --accent-pink: #ff85ff;
+            --accent-orange: #f97316;
+            
+            --border-width: 3px;
+            --shadow-offset: 6px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--main);
+            line-height: 1.4;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        header {
+            background: var(--accent-yellow);
+            border: var(--border-width) solid var(--main);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--main);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: var(--white);
+            display: inline-block;
+            padding: 5px 15px;
+            border: var(--border-width) solid var(--main);
+        }
+
+        .inst-name {
+            display: block;
+            margin-top: 15px;
+            font-weight: 800;
+            text-decoration: underline;
+        }
+
+        /* Sticky Navigation */
+        nav {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        nav a {
+            background: var(--white);
+            border: var(--border-width) solid var(--main);
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--main);
+            font-weight: 800;
+            font-size: 0.9rem;
+            box-shadow: 4px 4px 0px 0px var(--main);
+            transition: all 0.1s;
+        }
+
+        nav a:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px var(--main);
+            background: var(--accent-pink);
+        }
+
+        nav a:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px var(--main);
+        }
+
+        /* Container & Sections */
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .section-header {
+            margin-bottom: 30px;
+            background: var(--main);
+            color: var(--white);
+            padding: 15px 25px;
+            display: inline-block;
+            transform: rotate(-1deg);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* Grid & Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: var(--white);
+            border: var(--border-width) solid var(--main);
+            padding: 25px;
+            text-decoration: none;
+            color: var(--main);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--main);
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0px 0px var(--main);
+        }
+
+        /* Specific tag colors */
+        .tag {
+            font-weight: 800;
+            padding: 4px 10px;
+            border: 2px solid var(--main);
+            font-size: 0.7rem;
+            width: fit-content;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .tag-psom { background: var(--accent-orange); }
+        .tag-evt { background: var(--accent-green); }
+        .tag-sim { background: var(--accent-blue); color: white; }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .btn-link {
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            border-top: 2px solid var(--main);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Resources section card variant */
+        #resources .card {
+            background: var(--accent-pink);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            background: var(--white);
+            border: var(--border-width) solid var(--main);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--main);
+        }
+
+        .footer-credit { 
+            font-size: 1.2rem;
+            font-weight: 800; 
+            margin-bottom: 10px; 
+        }
+        
+        .heart { color: #ff0000; font-size: 1.4rem; }
+
+        .visitor-count-box {
+            margin-top: 20px;
+            display: inline-block;
+            background: var(--main);
+            color: var(--white);
+            padding: 10px 20px;
+            border: var(--border-width) solid var(--main);
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 30px 15px; }
+            .section-header { transform: none; width: 100%; text-align: center; }
+            nav { position: relative; top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-content">
+            <h1>Government Polytechnic, Junagadh</h1>
+            <p>Electrical Engineering Department</p>
+            <span class="inst-name">Rushabh D. Vanara</span>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#psom">PSOM Lab</a>
+        <a href="#evt">EV Tech Lab</a>
+        <a href="#simulators">Simulators</a>
+        <a href="#resources">Resources</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- PSOM EXPERIMENTS -->
+        <section id="psom">
+            <div class="section-header">
+                <h2>Power System Operation and Maintenance</h2>
+            </div>
+            <div class="grid">
+                <a href="https://rushabhvanara.github.io/psom1/" class="card"><span class="tag tag-psom">Exp 01</span><h3>Per-Unit Analysis</h3><p>Power flow and PU system calculations.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom2/" class="card"><span class="tag tag-psom">Exp 02</span><h3>Transformer Tap Control</h3><p>Real and reactive power flow control.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom3/" class="card"><span class="tag tag-psom">Exp 03</span><h3>Economic Load Dispatch</h3><p>Equal incremental cost criteria study.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom4/" class="card"><span class="tag tag-psom">Exp 04</span><h3>3-Plant ELD (₹)</h3><p>Multi-plant cost optimization in INR.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom5/" class="card"><span class="tag tag-psom">Exp 05</span><h3>HVAC vs HVDC</h3><p>Compare transmission losses & power.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom6/" class="card"><span class="tag tag-psom">Exp 06</span><h3>Line Compensation</h3><p>Shunt, Series, and UPFC simulators.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom7/" class="card"><span class="tag tag-psom">Exp 07</span><h3>Voltage Stability</h3><p>SVC vs STATCOM controller study.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom8/" class="card"><span class="tag tag-psom">Exp 08</span><h3>FACTS Controllers</h3><p>TCSC and SSSC power flow control.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom9/" class="card"><span class="tag tag-psom">Exp 09</span><h3>Stability (Basic)</h3><p>Transient stability via FACTS devices.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom9pro/" class="card"><span class="tag tag-psom">Exp 09 Pro</span><h3>Stability (Advanced)</h3><p>In-depth swing equation analysis.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom10/" class="card"><span class="tag tag-psom">Exp 10</span><h3>Demand Side Mgmt</h3><p>Peak clipping and load shifting study.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom11/" class="card"><span class="tag tag-psom">Exp 11</span><h3>Load Duration Curve</h3><p>Analyzing daily/annual load curves.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom12/" class="card"><span class="tag tag-psom">Exp 12</span><h3>Demand Response</h3><p>Smart grid pricing and response.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom13/" class="card"><span class="tag tag-psom">Exp 13</span><h3>BESS & Microgrid</h3><p>Renewable and battery balancing sim.</p><span class="btn-link">Start Lab <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/psom-uc/" class="card"><span class="tag tag-psom">psomx</span><h3>Unit Commitment</h3><p>Unit Commitment and frequency variations</p><span class="btn-link">Launch <span>→</span></span></a>
+            </div>
+        </section>
+
+        <!-- EV TECHNOLOGY EXPERIMENTS -->
+        <section id="evt">
+            <div class="section-header">
+                <h2>EV Technology Virtual Lab</h2>
+            </div>
+            <div class="grid">
+                <a href="https://rushabhvanara.github.io/evt1/" class="card"><span class="tag tag-evt">EVT 01</span><h3>EV Components</h3><p>Study of Motors, Controllers, and BMS.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt2/" class="card"><span class="tag tag-evt">EVT 02/03</span><h3>Tractive Force</h3><p>Estimating required power for motion.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt4/" class="card"><span class="tag tag-evt">EVT 04</span><h3>PWM Control</h3><p>Motor speed control demonstrations.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt5/" class="card"><span class="tag tag-evt">EVT 05</span><h3>Battery Capacity</h3><p>Measurement and estimation of AH.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt6/" class="card"><span class="tag tag-evt">EVT 06</span><h3>SoC Estimation</h3><p>Charge/Discharge characterization.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt7/" class="card"><span class="tag tag-evt">EVT 07</span><h3>Pack Design</h3><p>Series-Parallel battery calculations.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt8/" class="card"><span class="tag tag-evt">EVT 08</span><h3>Range & Charging</h3><p>Estimation of drive range & time.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt9/" class="card"><span class="tag tag-evt">EVT 09/10</span><h3>Wh/km Method</h3><p>Driving range via energy consumption.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt11/" class="card"><span class="tag tag-evt">EVT 11</span><h3>SoC Simulation</h3><p>Battery charging time estimations.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+                <a href="https://rushabhvanara.github.io/evt13/" class="card"><span class="tag tag-evt">EVT 13</span><h3>Charger Ratings</h3><p>Energy consumption for various chargers.</p><span class="btn-link">Launch Exp <span>→</span></span></a>
+            </div>
+        </section>
+        
+        <!-- INTERACTIVE SIMULATORS -->
+        <section id="simulators">
+            <div class="section-header">
+                <h2>Interactive Simulators</h2>
+            </div>
+            <div class="grid">
+                <a href="https://rushabhvanara.github.io/symcomp/" target="_blank" class="card">
+                    <span class="tag tag-sim">Sim1</span>
+                    <h3>Symmetrical Components</h3>
+                    <p>Analyze unbalanced faults using sequence networks (Positive, Negative, Zero).</p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+                <a href="https://rushabhvanara.github.io/flow/" target="_blank" class="card">
+                    <span class="tag tag-sim">Sim2</span>
+                    <h3>Power Flow Solver</h3>
+                    <p>Compute bus voltages, power angles, and transmission losses interactively.</p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+                <a href="https://rushabhvanara.github.io/slrclc/" target="_blank" class="card">
+                    <span class="tag tag-sim">mech1</span>
+                    <h3>Domestic Solar Plant</h3>
+                    <p>Interactive sizing, performance estimate, and financial payback calculation </p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+                <a href="https://rushabhvanara.github.io/sgp4/" target="_blank" class="card">
+                    <span class="tag tag-sim">sgp04</span>
+                    <h3>Numerical Overcurrent</h3>
+                    <p>Operation and characteristics of numerical over current relay.</p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+                <a href="https://rushabhvanara.github.io/sgp5/" target="_blank" class="card">
+                    <span class="tag tag-sim">sgp05</span>
+                    <h3>Differential Relay</h3>
+                    <p>Simulation of Operation and characteristics of differential relay.</p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+                <a href="https://rushabhvanara.github.io/sgp6/" target="_blank" class="card">
+                    <span class="tag tag-sim">sgp06</span>
+                    <h3>IDMT Relay</h3>
+                    <p>Operation and characteristics of IDMT over current relay.</p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+                <a href="https://rushabhvanara.github.io/sgp9/" target="_blank" class="card">
+                    <span class="tag tag-sim">sgp09</span>
+                    <h3>IM Protection</h3>
+                    <p>Simulation and calculation of numerical protection of IM.</p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+                <a href="https://rushabhvanara.github.io/sgp10/" target="_blank" class="card">
+                    <span class="tag tag-sim">sgp10</span>
+                    <h3>Generator Protection</h3>
+                    <p>Simulation and calculations of Percentage Biased Differential Relay.</p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+                <a href="https://rushabhvanara.github.io/ei1/" target="_blank" class="card">
+                    <span class="tag tag-sim">ei</span>
+                    <h3>Potentiometer</h3>
+                    <p>Interactive Simulation of Potentiometer measurement.</p>
+                    <span class="btn-link">Launch <span>→</span></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ACADEMIC RESOURCES -->
+        <section id="resources">
+            <div class="section-header">
+                <h2>Resources</h2>
+            </div>
+            <div class="grid">
+                <a href="https://tiny.cc/rushabhx" target="_blank" class="card">
+                    <h3>Learning Materials</h3>
+                    <p>Notes, Lab Manuals, and Presentations.</p>
+                    <span class="btn-link">Browse Drive <span>→</span></span>
+                </a>
+                <a href="https://www.youtube.com/@RushabhV1" target="_blank" class="card">
+                    <h3>YouTube Channel</h3>
+                    <p>Watch detailed video explanations & tutorials.</p>
+                    <span class="btn-link">Watch Videos <span>→</span></span>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p class="footer-credit">
+            <a href="https://rushabhvanara.github.io" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+                Made with <span class="heart">❤</span> by Rushabh D. Vanara
+            </a>
+        </p>
+        <p style="font-weight: 700;">Electrical Engineering Department, Government Polytechnic, Junagadh</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; font-weight: 600;">© 2026 All rights reserved.</p>
+        
+        <div class="visitor-count-box">
+            <span>VISITOR COUNT: </span>
+            <a href=" " target="_blank" rel="noopener" title="Total Characters" style="vertical-align: middle;">
+                <img src="https://www.hitwebcounter.com/counter/counter.php?page=21514488&amp;style=0007&amp;nbdigits=5&amp;type=page"
+                 alt="Visitor Count"
+                 decoding="async"
+                 style="border:0;" />
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>
